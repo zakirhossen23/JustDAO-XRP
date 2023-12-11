@@ -5,6 +5,9 @@ import Web3 from "web3";
 import erc20 from '../contracts/deployments/xrp/JustDAO.json';
 
 
+const sleep = milliseconds => {
+	return new Promise(resolve => setTimeout(resolve, milliseconds))
+}
 export default function useContract() {
 	const [contractInstance, setContractInstance] = useState({
 		contract: null,
@@ -55,6 +58,7 @@ export default function useContract() {
 			}
 			await (await window.signer.sendTransaction(tx)).wait();
 		} catch (error) {
+			await sleep(1500)
 		}
 		
 	}
